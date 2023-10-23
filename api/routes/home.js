@@ -1,5 +1,6 @@
 import express from "express";
 import { getServicesHomeBackend, getServicesHomeFrontend, getServicesHomeDesigner  } from "../controllers/home.js";
+import { getServiceDetailsById } from "../controllers/home.js";
 
 
 const router = express.Router()
@@ -18,5 +19,9 @@ router.get("/", (req, res, next) => {
       res.status(400).send('Invalid type');
     }
   });
+
+  router.get("/details/:id", getServiceDetailsById);
+
+  
 
 export default router

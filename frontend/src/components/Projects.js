@@ -1,4 +1,5 @@
 import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ProjectCard } from "./ProjectCard";
 import projImg1 from "../assets/img/project-img1.png";
 import projImg2 from "../assets/img/project-img2.png";
@@ -9,6 +10,7 @@ import TrackVisibility from 'react-on-screen';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import { Link } from 'react-router-dom';
 
 export const Projects = () => {
   
@@ -90,14 +92,18 @@ export const Projects = () => {
                     
                     <Row>
                     {
-                       ServicesBackend.map((serviceBackend, index) => (
-                    <ProjectCard
-                      key={index}
-                      title={serviceBackend.titulo}
-                      imgUrl={`${process.env.PUBLIC_URL}/upload-service/${serviceBackend.nome_arquivo}`}
-                     />
+                        ServicesBackend.map((serviceBackend, index) => (
+                        <>
+                          <ProjectCard
+                            key={index}
+                            title={serviceBackend.titulo}
+                            imgUrl={`${process.env.PUBLIC_URL}/upload-service/${serviceBackend.nome_arquivo}`}
+                            serviceId={serviceBackend.service_id}
+                          />
+                        </>
                       ))
                     }
+                    
                     </Row>
 
                     </Tab.Pane>
@@ -107,11 +113,14 @@ export const Projects = () => {
                     <Row>
                     {
                        ServicesDesigner.map((serviceDesigner, index) => (
-                    <ProjectCard
-                      key={index}
-                      title={serviceDesigner.titulo}
-                      imgUrl={`${process.env.PUBLIC_URL}/upload-service/${serviceDesigner.nome_arquivo}`}
-                     />
+                        <>
+                        <ProjectCard
+                          key={index}
+                          title={serviceDesigner.titulo}
+                          imgUrl={`${process.env.PUBLIC_URL}/upload-service/${serviceDesigner.nome_arquivo}`}
+                          serviceId={serviceDesigner.service_id}
+                        />
+                      </>
                       ))
                     }
                     </Row>
@@ -123,11 +132,14 @@ export const Projects = () => {
                     <Row>
                     {
                        ServicesFrontend.map((servicesFrontend, index) => (
-                    <ProjectCard
-                      key={index}
-                      title={servicesFrontend.titulo}
-                      imgUrl={`${process.env.PUBLIC_URL}/upload-service/${servicesFrontend.nome_arquivo}`}
-                     />
+                        <>
+                        <ProjectCard
+                          key={index}
+                          title={servicesFrontend.titulo}
+                          imgUrl={`${process.env.PUBLIC_URL}/upload-service/${servicesFrontend.nome_arquivo}`}
+                          serviceId={servicesFrontend.service_id}
+                        />
+                      </>
                       ))
                     }
                     </Row>

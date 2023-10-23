@@ -32,3 +32,12 @@ export const getServicesHomeFrontend = (req, res) => {
   });
 };
 
+export const getServiceDetailsById = (req, res) => {
+  const { id } = req.params;
+  const q = `SELECT T1.*, T2.* FROM services T1 LEFT JOIN imagens T2 ON T1.service_id = T2.service_id WHERE T1.service_id = ${id}`;
+
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.status(200).json(data);
+  });
+};
