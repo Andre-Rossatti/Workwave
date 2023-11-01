@@ -6,6 +6,7 @@ import { NavBar } from "./components/NavBar";
 import ServiceDetails from "./components/ServiceDetails";
 import HomePage from "./components/HomePage"; 
 import ConditionalFooter from "./components/ConditionalFooter";  // Importe o novo componente aqui
+import LoginComponent from './components/Login'; 
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/details/:id" element={<ServiceDetails />} />
+          <Route path="/login" component={LoginComponent} />
         </Routes>
         <ConditionalFooter />  {/* Utilize o novo componente aqui */}
       </Router>

@@ -4,6 +4,8 @@ import headerImg from "../assets/img/header-img.svg";
 import { ArrowRightCircle } from 'react-bootstrap-icons';
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
+import { Link } from 'react-router-dom';
+
 
 export const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
@@ -58,7 +60,7 @@ export const Banner = () => {
                 <span className="tagline">Encontre o seu primeiro Freela</span>
                 <h1>{`WorkWave`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Freelancers", "Empregadores", "Oportunidades" ]'><span className="wrap">{text}</span></span></h1>
                   <p>Você é um freelancer em busca de projetos que se alinham com suas habilidades e paixões? Bem-vindo ao WorkWave, a plataforma que compreende a necessidade de flexibilidade e liberdade em seu trabalho. Aqui, você não apenas encontrará empregos que se ajustam ao seu perfil, mas também terá a oportunidade de colaborar com clientes que valorizam seu talento.</p>
-                  <button onClick={() => console.log('connect')}>Faça seu login<ArrowRightCircle size={25} /></button>
+                  <Link to='/login'><button onClick={() => console.log('connect')}>Faça seu login<ArrowRightCircle size={25} /></button></Link>
               </div>}
             </TrackVisibility>
           </Col>

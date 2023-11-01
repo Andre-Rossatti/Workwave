@@ -22,6 +22,8 @@ router.get("/", (req, res, next) => {
 
   router.get("/details/:id", getServiceDetailsById);
 
-  
+  router.get("/login", (req, res) => {
+    res.redirect('/login');
+  });
 
 export default router
