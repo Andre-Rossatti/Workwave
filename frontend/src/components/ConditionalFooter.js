@@ -11,6 +11,10 @@ const ConditionalFooter = () => {
     footerStyle = { backgroundColor: 'black !important', color: 'white' }; // Estilo para a tela de detalhes
   }
 
+  // Adicionando uma condição para o caminho '/login'
+  if (location.pathname.includes('/login')) {
+    footerStyle = { /* seu estilo para a tela de login aqui, se necessário */ };
+  }
 
   return <Footer showMailchimpForm={showMailchimpForm} footerStyle={footerStyle} />;
 };

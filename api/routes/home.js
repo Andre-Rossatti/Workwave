@@ -1,6 +1,8 @@
 import express from "express";
 import { getServicesHomeBackend, getServicesHomeFrontend, getServicesHomeDesigner  } from "../controllers/home.js";
 import { getServiceDetailsById } from "../controllers/home.js";
+import { login } from "../controllers/login.js";
+import { register } from "../controllers/register.js";
 
 
 const router = express.Router()
@@ -22,8 +24,8 @@ router.get("/", (req, res, next) => {
 
   router.get("/details/:id", getServiceDetailsById);
 
-  router.get("/login", (req, res) => {
-    res.redirect('/login');
-  });
+  router.post("/login", login); 
+
+  router.post("/register", register);
 
 export default router
