@@ -1,0 +1,16 @@
+1º passo
+
+baixar o repositório do github https://github.com/Andre-Rossatti/WorkWave.git
+
+2º passo
+
+Importar o bd que esta dentro da pasta do projeto, para que assim seja possivel acessar as informações
+
+3º passo 
+
+acessar a pasta frontend -> e rodar o seguinte comando npm install
+depois rodar o npm run dev e por ultimo o npm start
+
+4º passo 
+
+acessar a pasta api -> e rodar o comando yarn, depois disso rodar yarn start
