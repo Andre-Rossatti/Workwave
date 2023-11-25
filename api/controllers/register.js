@@ -11,17 +11,16 @@ export const register = (req, res) => {
     const SQL = 'INSERT INTO users (username, senha, nome, email, telefone) VALUES (?,?,?,?,?)'
     const Values = [sentUsername, sentSenha, sentNome, sentEmail, sentTelefone]
 
-    // Query to execute the sql statement stated above
-    db.query(SQL, Values, (err, results) => {
-        if (err) {
-            res.send(err);
-            console.log('errrrrro!');
-            console.log(SQL);
-            console.log(Values);
-        }
-        else {
-            console.log('Usuário inserido com sucesso!');
-            res.send({ message: 'Usuário adicionado!' })
-        }
-    })
+   // Consulta para executar a declaração SQL
+   db.query(SQL, Values, (err, results) => {
+    if (err) {
+        res.status(500).json({ error: 'Erro ao adicionar o serviço' + err + results});
+        console.log('Erro!');
+        console.log(SQL);
+        console.log(Values);
+    } else {
+        res.status(201).json({ message: 'Serviço adicionado!' });
+    }
+});
+
 }

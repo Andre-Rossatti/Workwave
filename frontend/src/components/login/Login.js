@@ -11,6 +11,7 @@ import { AiOutlineSwapRight } from 'react-icons/ai'
 
 
 
+
 const Login = () => {
     const [loginUsername, setLoginUsername] = useState('');
     const [loginSenha, setLoginSenha] = useState('');
@@ -20,17 +21,27 @@ const Login = () => {
 
     const loginUser = (e) => {
         e.preventDefault();
+        if (loginUsername === '' || loginSenha === '') {
+            setLoginStatus('Por favor, preencha todos os campos.');
+            return; // Impede a continuação da função se os campos estiverem vazios
+        }
+        
         Axios.post('http://localhost:8800/login', {
-          LoginUsername: loginUsername,
-          LoginSenha: loginSenha
+            LoginUsername: loginUsername,
+            LoginSenha: loginSenha
         }).then((response) => {
-            console.log(response.data)
-            if (response.data.message || loginUsername === '' || loginSenha === '') {
-                // navigateTo('/')  // Comente ou remova esta linha
-                setLoginStatus(`Credenciais não coincidem!`);
+            if (response.data.loggedIn) {
+                // Armazenar o userId no localStorage ou no estado do aplicativo
+                localStorage.setItem('userId', response.data.userId);
+                navigateTo('/dashboard') // Substitua '/dashboard' pelo caminho desejado
+            } else {
+                // Definir mensagem de erro com base na resposta do servidor
+                setLoginStatus(response.data.message);
             }
-            
-        })
+        }).catch((error) => {
+            console.error('Erro no login:', error);
+            setLoginStatus('Ocorreu um erro ao tentar fazer login.');
+        });
     }
 
     useEffect(() => {
@@ -107,5 +118,36 @@ const Login = () => {
         </div>
     )
 }
+
+
+
+
+
+fetch('/login', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        LoginUsername: 'username',
+        LoginSenha: 'password',
+    }),
+})
+.then(response => response.json())
+.then(data => {
+    if (data.loggedIn) {
+        // Armazenar o userId no localStorage para uso posterior
+        localStorage.setItem('userId', data.userId);
+
+        // Redirecionar para a dashboard
+        window.location.href = '/dashboard';
+    } else {
+        // Exibir mensagem de erro
+        alert(data.message);
+    }
+})
+.catch(error => {
+    console.error('Erro no login:', error);
+});
 
 export default Login

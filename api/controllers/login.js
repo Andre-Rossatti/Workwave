@@ -30,23 +30,25 @@ export const register = (req, res) => {
 
 
 export const login = (req, res) => {
-    const sentloginUsername = req.body.LoginUsername
-    const sentLoginSenha = req.body.LoginSenha
+    const sentloginUsername = req.body.LoginUsername;
+    const sentLoginSenha = req.body.LoginSenha;
 
-    // Lets create SQL statement to insert the user to the Database table Users
-    const SQL = 'SELECT * FROM users WHERE username = ? && senha = ?'
-    const Values = [sentloginUsername, sentLoginSenha]
+    const SQL = 'SELECT * FROM users WHERE username = ? AND senha = ?';
+    const Values = [sentloginUsername, sentLoginSenha];
 
-        // Query to execute the sql statement stated above
-        db.query(SQL, Values, (err, results) => {
-            if(err) {
-                res.send({error: err})
-            }
-            if(results.length > 0) {
-                res.send(results)
-            }
-            else{
-                res.send({message: `Credenciais não coincidem!`})
-            }
-        })
+    db.query(SQL, Values, (err, results) => {
+        if (err) {
+            res.send({ error: err });
+        } else if (results.length > 0) {
+            const user = results[0];
+            // Aqui você pode adicionar mais informações baseadas em user
+            res.send({ 
+                loggedIn: true, 
+                userId: user.user_id,
+
+            });
+        } else {
+            res.send({ loggedIn: false, message: 'Credenciais não coincidem!' });
+        }
+    });
 };

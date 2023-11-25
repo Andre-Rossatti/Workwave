@@ -7,8 +7,8 @@ import navIcon3 from '../assets/img/nav-icon3.svg';
 import { HashLink } from 'react-router-hash-link';
 import { Link } from 'react-router-dom';
 
-export const NavBar = () => {
 
+export const NavBar = ({ hidden }) => {
   const [activeLink, setActiveLink] = useState('home');
   const [scrolled, setScrolled] = useState(false);
 
@@ -24,10 +24,14 @@ export const NavBar = () => {
     window.addEventListener("scroll", onScroll);
 
     return () => window.removeEventListener("scroll", onScroll);
-  }, [])
+  }, []);
 
   const onUpdateActiveLink = (value) => {
     setActiveLink(value);
+  }
+
+  if (hidden) {
+    return null; // Não renderizar o NavBar se hidden for true
   }
 
   return (
@@ -52,5 +56,5 @@ export const NavBar = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  )
-}
+   );
+  }
